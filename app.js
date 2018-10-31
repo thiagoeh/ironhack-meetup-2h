@@ -9,6 +9,7 @@ let looper;
 
 // Out X value that will be incremented.
 let rectX = 0;
+let rectInc = 1;
 
 // Stops the animation.
 const stopLooper = () => clearInterval(looper);
@@ -16,8 +17,9 @@ const stopLooper = () => clearInterval(looper);
 // Function that draws the rectangle.
 const drawRectangle = (x) => {
   // Stops the animation when the rectangle reaches the end.
-  if (x > canvas.width - 50) {
-    stopLooper();
+  if (x > canvas.width - 50 || x == 0) {
+    //stopLooper();
+    rectInc *= -1;
   }
   ctx.fillStyle = 'grey';
   ctx.fillRect(x, 0, 50, 50);
@@ -28,8 +30,8 @@ const render = () => {
   // We clean everything in the canvas.
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // Call the function that draws the rectangle incrementing x.
-  drawRectangle(rectX += 1);
+  drawRectangle(rectX += rectInc);
 }
 
 // Starting looper.
-looper = setInterval(render, 10);
+looper = setInterval(render, 1);
